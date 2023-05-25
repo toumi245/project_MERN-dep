@@ -1,6 +1,6 @@
 {
   "name": "mern",
-  "proxy": "https://backend-kybc.onrender.com/",
+  "proxy": "https://mern-ecommerce-app-e8mm.onrender.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
