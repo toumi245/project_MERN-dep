@@ -9,6 +9,8 @@ import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import pcProductsRoutes from './routes/pcProductsRoutes.js'
+import cors from 'cors'
+import path from 'path'
 
 import connectDB from './config/db.js'
 import { Error } from 'mongoose'
@@ -24,7 +26,12 @@ app.use('/api/toumi',pcProductsRoutes)
 app.get(`api/config/paypal`,(req,res)=>
     res.send(process.env.PAYPAL_CLIENT_ID)
 )
+if (process.env.NODE_ENV === 'production') {
+    //*Set static folder up in production
+    app.use(express.static('FronEnd/build'));
 
+    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'FronEnd', 'build','index.html')));
+  }
 app.use(notFound)
 app.use(errorHandler)
 app.use((req,res,next)=>{
